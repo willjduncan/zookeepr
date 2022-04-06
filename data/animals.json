@@ -110,13 +110,23 @@
       "id": "10"
     },
     {
-      "name": "g",
-      "species": "lemur",
-      "diet": "omnivore",
+      "name": "Alex",
+      "species": "lion",
+      "diet": "carnivore",
       "personalityTraits": [
         "hungry"
       ],
       "id": "11"
+    },
+    {
+      "name": "Marty",
+      "species": "zebra",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "zany",
+        "goofy"
+      ],
+      "id": "12"
     }
   ]
 }

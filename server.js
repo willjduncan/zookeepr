@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
+app.use(express.static('public'));
 // parse incoming string or array data
 //The express.urlencoded({extended: true}) method is a method built into Express.js. 
 //It takes incoming POST data and converts it to key/value pairings that can be accessed in the req.body object. 
@@ -93,7 +94,7 @@ app.get('/api/animals', (req, res) => {
       results = filterByQuery(req.query, results);
     }
     res.json(results);
- });
+});
 
  
 app.get('/api/animals/:id', (req, res) => {
@@ -104,6 +105,23 @@ app.get('/api/animals/:id', (req, res) => {
         res.send(404);
     }
 });
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+//In case anyone types a weird thing into the URL, redirect them to the main page
+//this one must come last
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+  });
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
@@ -120,4 +138,4 @@ app.post('/api/animals', (req, res) => {
       const animal = createNewAnimal(req.body, animals);
       res.json(animal);
     }
-  });
+});
